@@ -7,8 +7,7 @@ import {
   ActionTree,
   mapState,
   Module
-} from 'vuex';
-import { Identifier } from '@/components/stores/EventStatus';
+} from "vuex";
 
 type ArrayLike<T> = T[] | ReadonlyArray<T>;
 
@@ -24,7 +23,7 @@ type ActionHandlerMapper<
   R = {}
 > = A extends ActionHandler<S, R>
   ? PickupPayload<A>
-  : PickupPayload<Exclude<A, ActionHandler<S, R>>['handler']>;
+  : PickupPayload<Exclude<A, ActionHandler<S, R>>["handler"]>;
 
 type MappedActions<A extends ActionTree<S, R>, S = {}, R = {}> = Dictionary<
   ActionMethod
@@ -54,7 +53,7 @@ export const mapStateWithType = <S, R = {}>(_: Module<S, R>) => <
   ...args: [K[]] | [string, K[]]
 ) => {
   const isWithNamespace = (val: [K[]] | [string, K[]]): val is [string, K[]] =>
-    typeof val[0] === 'string';
+    typeof val[0] === "string";
   if (isWithNamespace(args)) {
     const [namespace, map] = args;
     return stateMapperWithNamespace<S, K>(namespace, map);
@@ -65,12 +64,12 @@ export const mapStateWithType = <S, R = {}>(_: Module<S, R>) => <
 };
 
 const state = {
-  test: 'test',
+  test: "test",
   testNum: 1
 };
 
 const actions = {
-  fetchTest: async () => console.log('actions')
+  fetchTest: async () => console.log("actions")
 };
 
 const modules = <Module<typeof state, {}>>{
@@ -78,4 +77,4 @@ const modules = <Module<typeof state, {}>>{
 };
 
 const mapper = mapStateWithType(modules);
-const mapped = mapper(Identifier, ['test']);
+const mapped = mapper(["test"]);

@@ -27,9 +27,9 @@ export interface FullyTypedModule<
 export const buildModule = <
   S,
   R,
-  A extends ActionTree<S, R> = {},
-  M extends MutationTree<S> = {},
-  G extends GetterTree<S, R> = {}
+  A extends ActionTree<S, R> = ActionTree<S, R>,
+  M extends MutationTree<S> = MutationTree<S>,
+  G extends GetterTree<S, R> = GetterTree<S, R>
 >(
   mod: FullyTypedModuleDefinition<S, R, A, M, G>
 ): FullyTypedModule<S, R, A, M, G> => ({

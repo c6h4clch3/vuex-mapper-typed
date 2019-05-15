@@ -33,7 +33,7 @@ const actionMapperWithNamespace = <
   map: K[]
 ) => mapActions(namespace, map as string[]) as MappedActions<A>;
 
-interface ActionsMapper<A extends ActionTree<any, any>> {
+export interface ActionsMapper<A extends ActionTree<any, any>> {
   <K extends keyof A>(map: K[]): MappedActions<Pick<A, K>>;
   <K extends keyof A>(namespace: string, map: K[]): MappedActions<Pick<A, K>>;
 }

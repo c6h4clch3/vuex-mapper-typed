@@ -12,7 +12,7 @@ interface FullyTypedModuleDefinition<
   getters?: G;
 }
 
-interface FullyTypedModule<
+export interface FullyTypedModule<
   S,
   R,
   A extends ActionTree<S, R> = {},

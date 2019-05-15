@@ -9,15 +9,14 @@ const stateMapperWithNamespace = <S, K extends keyof S>(
   map: K[]
 ) => mapState(namespace, map as string[]) as MappedState<Pick<S, K>>;
 
-interface StateMapper<State> {
+export interface StateMapper<State> {
   <Key extends keyof State>(map: Key[]): MappedState<Pick<State, Key>>;
   <Key extends keyof State>(namespace: string, map: Key[]): MappedState<
     Pick<State, Key>
   >;
 }
 
-export const mapStateWithType = <S>(
-): StateMapper<S> => <K extends keyof S>(
+export const mapStateWithType = <S>(): StateMapper<S> => <K extends keyof S>(
   ...args: [K[]] | [string, K[]]
 ): MappedState<Pick<S, K>> => {
   const isWithNamespace = (val: [K[]] | [string, K[]]): val is [string, K[]] =>

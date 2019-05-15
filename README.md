@@ -2,7 +2,7 @@
 
 Vuex の mapXXXX をモジュール定義から動的に利用できるようにするツール
 
-The Helper Tools allows you to use mapXXXX methods of Vuex.
+The Helper Tools allows you to use mapXXXX methods in Vuex with the mapped types derives from module definition.
 
 ## Note
 

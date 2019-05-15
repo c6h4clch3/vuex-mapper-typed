@@ -12,11 +12,5 @@
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
     "types": ["webpack-env", "mocha", "chai"]
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx"
-  ]
+  "include": ["src/**/*.ts"]
 }

@@ -5,6 +5,16 @@ import { mapActionsWithType } from "./actions";
 import { mapMutationsWithType } from "./mutations";
 import { mapGettersWithType } from "./getters";
 
+/**
+ * Returns fully-typed mappers:
+ *
+ * - `mapStateWithType<S>`
+ * - `mapActionsWithType<A>`
+ * - `mapMutationsWithType<M>`
+ * - `mapGettersWithType<G>`
+ *
+ * @param _module fully typed Vuex module
+ */
 export const makeMappers = <
   S,
   R,

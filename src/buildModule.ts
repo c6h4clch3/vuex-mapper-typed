@@ -24,6 +24,11 @@ export interface FullyTypedModule<
   getters: G;
 }
 
+/**
+ * Defines fully-typed Vuex module.
+ *
+ * @param mod definition of Vuex module
+ */
 export const buildModule = <
   S,
   R,

@@ -1,5 +1,5 @@
 import { ActionTree, Module, MutationTree, GetterTree } from "vuex";
-import { State } from "./definitions";
+import { State } from "../definitions";
 
 interface FullyTypedModuleDefinition<
   S,

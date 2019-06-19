@@ -7,7 +7,7 @@ import {
   ActionObject,
   mapActions
 } from "vuex";
-import { keyOf } from "./utils/keyof";
+import { keyOf } from "../utils/keyof";
 
 type PickupPayload<A extends ActionHandler<any, any>> = (
   payload: Parameters<A>[1]

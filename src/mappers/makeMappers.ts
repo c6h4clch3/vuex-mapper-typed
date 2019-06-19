@@ -1,10 +1,10 @@
 import { ActionTree, MutationTree, GetterTree } from "vuex";
-import { FullyTypedModule } from "./buildModule";
+import { FullyTypedModule } from "../modules/buildModule";
 import { mapStateWithType } from "./state";
 import { mapActionsWithType } from "./actions";
 import { mapMutationsWithType } from "./mutations";
 import { mapGettersWithType } from "./getters";
-import { State } from "./definitions";
+import { State } from "../definitions";
 
 const isStateConstructor = <S>(val: State<S>): val is () => S =>
   typeof val === "function";

@@ -5,7 +5,7 @@ import {
   MutationMethod,
   mapMutations
 } from "vuex";
-import { keyOf } from "./utils/keyof";
+import { keyOf } from "../utils/keyof";
 
 type PickupPayload<M extends Mutation<any>> = (
   payload: Parameters<M>[1]

@@ -1,5 +1,5 @@
 import { Dictionary, Computed, mapGetters, GetterTree } from "vuex";
-import { keyOf } from "./utils/keyof";
+import { keyOf } from "../utils/keyof";
 
 type MappedGetters<G extends GetterTree<any, any>> = Dictionary<Computed> &
   { [P in keyof G]: G[P] };

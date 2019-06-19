@@ -1,2 +1,2 @@
-export * from "./makeMappers";
-export * from "./buildModule";
+export * from "./mappers/makeMappers";
+export * from "./modules/buildModule";

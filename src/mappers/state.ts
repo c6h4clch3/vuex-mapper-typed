@@ -1,5 +1,5 @@
 import { Dictionary, Computed, mapState } from "vuex";
-import { keyOf } from "./utils/keyof";
+import { keyOf } from "../utils/keyof";
 
 type MappedState<S> = Dictionary<Computed> & { [P in keyof S]: () => S[P] };
 

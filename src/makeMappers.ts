@@ -4,6 +4,10 @@ import { mapStateWithType } from "./state";
 import { mapActionsWithType } from "./actions";
 import { mapMutationsWithType } from "./mutations";
 import { mapGettersWithType } from "./getters";
+import { State } from "./definitions";
+
+const isStateConstructor = <S>(val: State<S>): val is () => S =>
+  typeof val === "function";
 
 /**
  * Returns fully-typed mappers:
@@ -13,7 +17,7 @@ import { mapGettersWithType } from "./getters";
  * - `mapMutationsWithType<M>`
  * - `mapGettersWithType<G>`
  *
- * @param _module fully typed Vuex module
+ * @param mod fully typed Vuex module
  */
 export const makeMappers = <
   S,
@@ -22,10 +26,12 @@ export const makeMappers = <
   M extends MutationTree<S>,
   G extends GetterTree<S, R>
 >(
-  _module: FullyTypedModule<S, R, A, M, G>
+  mod: FullyTypedModule<S, R, A, M, G>
 ) => ({
-  mapStateWithType: mapStateWithType<S>(),
-  mapActionsWithType: mapActionsWithType<A>(),
-  mapMutationsWithType: mapMutationsWithType<M>(),
-  mapGettersWithType: mapGettersWithType<G>()
+  mapStateWithType: mapStateWithType(
+    isStateConstructor(mod.state) ? mod.state() : mod.state
+  ),
+  mapActionsWithType: mapActionsWithType(mod.actions),
+  mapMutationsWithType: mapMutationsWithType(mod.mutations),
+  mapGettersWithType: mapGettersWithType(mod.getters)
 });

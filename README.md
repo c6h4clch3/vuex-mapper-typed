@@ -143,11 +143,22 @@ function makeMappers<
 >(
   _module: FullyTypedModule<S, R, A, M, G>
 ): {
-  mapStateWithType<S>(...args: [(keyof S)[]] | [string, [(keyof S)]]);
-  mapActionsWithType<A>(...args: [(keyof A)[]] | [string, [(keyof A)]]);
-  mapMutationsWithType<M>(...args: [(keyof M)[]] | [string, [(keyof M)]]);
-  mapGettersWithType<G>(...args: [(keyof G)[]] | [string, [(keyof G)]]);
+  mapStateWithType();
+  mapActionsWithType();
+  mapMutationsWithType();
+  mapGettersWithType();
 };
+```
+
+###### mapXXXXWithType
+
+```ts
+// maps all of properties in XXXX.
+function mapXXXXWithType();
+function mapXXXXWithType(namespace: string);
+// maps properties with the defined names in XXXX. (`X` in Generics means `typeof XXXX`.)
+function mapXXXXWithType<K extends keyof X>(map: K[]);
+function mapXXXXWithType<K extends keyof X>(namespace: string, map: K[]);
 ```
 
 ### Interfaces

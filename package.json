@@ -1,6 +1,6 @@
 {
   "name": "vuex-mapper-typed",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "library that allows you to use typed vuex helpers",
   "main": "dist/index.js",
   "repository": "https://github.com/c6h4clch3/vuex-mapper-typed.git",

@@ -52,6 +52,7 @@ describe("Non-Namespaced store", () => {
   const mappers = makeMappers(modular);
   const mappedState = mappers.mapStateWithType(["a"]);
   const mappedActions = mappers.mapActionsWithType(["modA", "modC", "modD"]);
+  mappedActions.modA;
   mappedActions.modC;
   mappedActions.modD;
   const mappedMutations = mappers.mapMutationsWithType([

@@ -5,18 +5,20 @@ import {
   ActionHandler,
   ActionTree,
   ActionObject,
-  mapActions
+  mapActions,
+  Store
 } from "vuex";
 import { keyOf } from "../utils/keyof";
 
 type ActionPayload<A extends ActionHandler<any, any>> = A extends (
-  state: any,
+  this: Store<any>,
+  injectee: any,
   payload?: undefined | null
 ) => any
   ? undefined
-  : A extends (state: any, payload?: infer P) => any
+  : A extends (this: Store<any>, injectee: any, payload?: infer P) => any
   ? P | undefined
-  : A extends (state: any, payload: infer R) => any
+  : A extends (this: Store<any>, injectee: any, payload: infer R) => any
   ? NonNullable<R>
   : undefined;
 
@@ -39,8 +41,9 @@ type ActionHandlerMapper<A extends Action<any, any>> = A extends ActionHandler<
   ? PickupPayload<A>
   : PickupPayload<ActionObject<any, any>["handler"]>;
 
-type MappedActions<A extends ActionTree<any, any>> = Dictionary<ActionMethod> &
-  { [P in keyof A]: ActionHandlerMapper<A[P]> };
+type MappedActions<A extends ActionTree<any, any>> = {
+  [P in keyof A]: ActionHandlerMapper<A[P]>
+};
 
 const actionMapper = <A extends ActionTree<any, any>, K extends keyof A>(
   _actions: A,

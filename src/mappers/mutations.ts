@@ -1,18 +1,32 @@
-import {
-  MutationTree,
-  Mutation,
-  Dictionary,
-  MutationMethod,
-  mapMutations
-} from "vuex";
+import { MutationTree, Mutation, mapMutations } from "vuex";
 import { keyOf } from "../utils/keyof";
 
-type PickupPayload<M extends Mutation<any>> = (
-  payload: Parameters<M>[1]
-) => ReturnType<M>;
+export type MutationPayload<M extends Mutation<any>> = M extends (
+  state: any,
+  payload?: undefined | null
+) => any
+  ? undefined
+  : M extends (state: any, payload?: infer P) => any
+  ? P | undefined
+  : M extends (state: any, payload: infer R) => any
+  ? NonNullable<R>
+  : undefined;
 
-type MappedMutation<M extends MutationTree<any>> = Dictionary<MutationMethod> &
-  { [P in keyof M]: PickupPayload<M[P]> };
+type PickupPayloadWithParams<M extends Mutation<any>> = MutationPayload<
+  M
+> extends NonNullable<MutationPayload<M>>
+  ? (payload: MutationPayload<M>) => ReturnType<M>
+  : (payload?: NonNullable<MutationPayload<M>>) => ReturnType<M>;
+
+type PickupPayload<M extends Mutation<any>> = NonNullable<
+  MutationPayload<M>
+> extends never
+  ? () => ReturnType<M>
+  : PickupPayloadWithParams<M>;
+
+type MappedMutation<M extends MutationTree<any>> = {
+  [P in keyof M]: PickupPayload<M[P]>
+};
 
 const mutationMapper = <M extends MutationTree<any>, K extends keyof M>(
   _mutations: M,

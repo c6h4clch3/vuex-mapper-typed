@@ -19,7 +19,9 @@ const modular = buildModule({
     },
     modB({ commit }, str: string) {
       commit("mutateB", str);
-    }
+    },
+    modC({ commit }) {},
+    modD({ commit }, str?: string) {}
   },
   mutations: {
     mutateA(state, num: number) {
@@ -27,7 +29,9 @@ const modular = buildModule({
     },
     mutateB(state, str: string) {
       state.b = str;
-    }
+    },
+    mutateC(state, str?: string) {},
+    mutateD(state) {}
   },
   getters: {
     strA(state) {
@@ -47,8 +51,17 @@ const MODULE_IDENTIFIER = "test";
 describe("Non-Namespaced store", () => {
   const mappers = makeMappers(modular);
   const mappedState = mappers.mapStateWithType(["a"]);
-  const mappedActions = mappers.mapActionsWithType(["modA"]);
-  const mappedMutations = mappers.mapMutationsWithType(["mutateA"]);
+  const mappedActions = mappers.mapActionsWithType(["modA", "modC", "modD"]);
+  mappedActions.modC;
+  mappedActions.modD;
+  const mappedMutations = mappers.mapMutationsWithType([
+    "mutateA",
+    "mutateC",
+    "mutateD"
+  ]);
+  mappedMutations.mutateA;
+  mappedMutations.mutateC;
+  mappedMutations.mutateD;
   const mappedGetters = mappers.mapGettersWithType(["strA"]);
 
   const component = localVue.extend({

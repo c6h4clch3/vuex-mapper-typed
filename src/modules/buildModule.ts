@@ -3,7 +3,7 @@ import { State } from "../definitions";
 
 interface FullyTypedModuleDefinition<
   S,
-  R,
+  R extends any,
   A extends ActionTree<S, R> = {},
   M extends MutationTree<S> = {},
   G extends GetterTree<S, R> = {}
@@ -16,7 +16,7 @@ interface FullyTypedModuleDefinition<
 
 export interface FullyTypedModule<
   S,
-  R,
+  R extends any,
   A extends ActionTree<S, R> = {},
   M extends MutationTree<S> = {},
   G extends GetterTree<S, R> = {}
@@ -34,7 +34,7 @@ export interface FullyTypedModule<
  */
 export const buildModule = <
   S,
-  R,
+  R extends any,
   A extends ActionTree<S, R> = ActionTree<S, R>,
   M extends MutationTree<S> = MutationTree<S>,
   G extends GetterTree<S, R> = GetterTree<S, R>

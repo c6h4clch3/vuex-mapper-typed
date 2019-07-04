@@ -9,9 +9,28 @@ import {
 } from "vuex";
 import { keyOf } from "../utils/keyof";
 
-type PickupPayload<A extends ActionHandler<any, any>> = (
-  payload: Parameters<A>[1]
-) => ReturnType<A>;
+type ActionPayload<A extends ActionHandler<any, any>> = A extends (
+  state: any,
+  payload?: undefined | null
+) => any
+  ? undefined
+  : A extends (state: any, payload?: infer P) => any
+  ? P | undefined
+  : A extends (state: any, payload: infer R) => any
+  ? NonNullable<R>
+  : undefined;
+
+type PickupPayloadWithParams<A extends ActionHandler<any, any>> = ActionPayload<
+  A
+> extends NonNullable<ActionPayload<A>>
+  ? (payload: ActionPayload<A>) => ReturnType<A>
+  : (payload?: NonNullable<ActionPayload<A>>) => ReturnType<A>;
+
+type PickupPayload<A extends ActionHandler<any, any>> = NonNullable<
+  ActionPayload<A>
+> extends never
+  ? () => ReturnType<A>
+  : PickupPayloadWithParams<A>;
 
 type ActionHandlerMapper<A extends Action<any, any>> = A extends ActionHandler<
   any,

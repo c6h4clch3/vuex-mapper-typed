@@ -1,7 +1,7 @@
-import { Dictionary, Computed, mapState } from "vuex";
+import { Computed, mapState, Mapper } from "vuex";
 import { keyOf } from "../utils/keyof";
 
-type MappedState<S> = Dictionary<Computed> & { [P in keyof S]: () => S[P] };
+type MappedState<S> = Mapper<Computed> & { [P in keyof S]: () => S[P] };
 
 const stateMapper = <S, K extends keyof S>(_state: S, map: K[]) =>
   mapState(map as string[]) as MappedState<S>;

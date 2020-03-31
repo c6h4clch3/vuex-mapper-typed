@@ -1,7 +1,7 @@
-import { Dictionary, Computed, mapGetters, GetterTree } from "vuex";
+import { Computed, mapGetters, GetterTree, Mapper } from "vuex";
 import { keyOf } from "../utils/keyof";
 
-type MappedGetters<G extends GetterTree<any, any>> = Dictionary<Computed> &
+type MappedGetters<G extends GetterTree<any, any>> = Mapper<Computed> &
   { [P in keyof G]: () => ReturnType<G[P]> };
 
 const getterMapper = <G extends GetterTree<any, any>, K extends keyof G>(

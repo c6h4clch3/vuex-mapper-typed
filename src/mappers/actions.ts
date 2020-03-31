@@ -1,6 +1,4 @@
 import {
-  Dictionary,
-  ActionMethod,
   Action,
   ActionHandler,
   ActionTree,
@@ -42,7 +40,7 @@ type ActionHandlerMapper<A extends Action<any, any>> = A extends ActionHandler<
   : PickupPayload<ActionObject<any, any>["handler"]>;
 
 type MappedActions<A extends ActionTree<any, any>> = {
-  [P in keyof A]: ActionHandlerMapper<A[P]>
+  [P in keyof A]: ActionHandlerMapper<A[P]>;
 };
 
 const actionMapper = <A extends ActionTree<any, any>, K extends keyof A>(
